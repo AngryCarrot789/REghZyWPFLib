@@ -6,24 +6,23 @@ namespace REghZyWPFLib.Example.Users.Create {
     /// <summary>
     /// Interaction logic for NewUserWindow.xaml
     /// </summary>
-    public partial class NewUserWindow : Window, IView<bool> {
+    public partial class NewUserWindow : Window, IView<bool?> {
         public NewUserWindow() {
             this.InitializeComponent();
-            this.UsernameBox.Focus();
         }
 
         private void NewUserWindow_OnPreviewKeyDown(object sender, KeyEventArgs e) {
             if (e.Key == Key.Enter) {
                 e.Handled = true;
-                this.CloseDialog(true);
+                ((NewUserViewModel) this.DataContext).ConfirmAction();
             }
             else if (e.Key == Key.Escape) {
                 e.Handled = true;
-                this.CloseDialog(false);
+                ((NewUserViewModel) this.DataContext).CancelAction();
             }
         }
 
-        public void CloseDialog(bool result) {
+        public void CloseView(bool? result) {
             this.DialogResult = result;
             this.Close();
         }

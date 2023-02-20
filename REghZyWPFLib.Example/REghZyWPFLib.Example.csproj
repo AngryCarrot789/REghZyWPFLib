@@ -59,6 +59,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="IoC.cs" />
+    <Compile Include="Messages\IMessageDialogService.cs" />
+    <Compile Include="Users\ContextService.cs" />
+    <Compile Include="Users\Converters\StringFormatConverter.cs" />
     <Compile Include="Users\Create\NewUserDialogResult.cs" />
     <Compile Include="Users\Create\NewUserViewModel.cs" />
     <Compile Include="Users\Create\NewUserWindow.xaml.cs">
@@ -71,7 +74,6 @@
       <DependentUpon>ModifyUserWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Users\UserContextItemViewModel.cs" />
-    <Compile Include="Users\UserContextMenuService.cs" />
     <Compile Include="Users\UserManagerViewModel.cs" />
     <Compile Include="Users\UserViewModel.cs" />
     <Page Include="MainWindow.xaml">
@@ -127,6 +129,5 @@
       <Name>REghZyWPFLib.Core</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

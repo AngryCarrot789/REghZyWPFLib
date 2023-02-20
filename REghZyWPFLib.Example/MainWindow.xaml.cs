@@ -1,20 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using REghZyWPFLib.Core;
+﻿using System.Windows;
+using REghZyWPFLib.Example.Messages;
 using REghZyWPFLib.Example.Users;
-using REghZyWPFLib.Example.Users.Create;
 
 namespace REghZyWPFLib.Example {
     /// <summary>
@@ -24,6 +10,7 @@ namespace REghZyWPFLib.Example {
         public MainWindow() {
             this.InitializeComponent();
             IoC.Instance.Register<IUserDialogService>(new UserDialogService());
+            IoC.Instance.Register<IMessageDialogService>(new MessageDialogService());
             this.DataContext = new UserManagerViewModel();
         }
     }

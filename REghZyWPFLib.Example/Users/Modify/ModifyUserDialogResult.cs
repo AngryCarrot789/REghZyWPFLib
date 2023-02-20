@@ -2,7 +2,7 @@
 
 namespace REghZyWPFLib.Example.Users.Modify {
     public class ModifyUserDialogResult : BaseDialogResult<bool> {
-        public string Username { get; set; }
+        public ModifyUserViewModel ViewModel { get; set; }
 
         public ModifyUserDialogResult() {
 

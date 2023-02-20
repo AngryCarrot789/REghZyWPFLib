@@ -5,27 +5,40 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:REghZyWPFLib.Example"
         xmlns:users="clr-namespace:REghZyWPFLib.Example.Users"
+        xmlns:converters="clr-namespace:REghZyWPFLib.Example.Users.Converters"
         d:DataContext="{d:DesignInstance Type=users:UserManagerViewModel}"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <converters:StringFormatConverter x:Key="StringFormatter"/>
+    </Window.Resources>
+    <Window.InputBindings>
+        <KeyBinding Key="N" Modifiers="Control+Shift" Command="{Binding CreateUserCommand, Mode=OneTime}"/>
+    </Window.InputBindings>
     <Grid>
+        <Grid.Resources>
+            <ContextMenu x:Key="GlobalItemContextMenu" x:Shared="True" d:DataContext="{d:DesignInstance Type=users:UserViewModel}">
+                <MenuItem Header="{Binding Username, Converter={StaticResource StringFormatter}, ConverterParameter='Modify {0}'}" Command="{Binding ModifyCommand, Mode=OneTime}"/>
+                <MenuItem Header="{Binding Username, Converter={StaticResource StringFormatter}, ConverterParameter='Delete {0}!'}" Command="{Binding DeleteCommand, Mode=OneTime}"/>
+            </ContextMenu>
+        </Grid.Resources>
         <Button Command="{Binding CreateUserCommand}" Content="New user" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="100"/>
-        <ListBox ItemsSource="{Binding Users}" x:Name="List" HorizontalAlignment="Left" Margin="10,35,0,10" Width="772">
-            <ListBox.ContextMenu>
-                <ContextMenu>
-                    <MenuItem Header="Create new..." Command="{Binding CreateUserCommand}"/>
-                </ContextMenu>
-            </ListBox.ContextMenu>
+        <ListBox ItemsSource="{Binding Users}" x:Name="List" HorizontalAlignment="Left" Margin="10,35,0,10" Width="772" HorizontalContentAlignment="Stretch">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem" BasedOn="{StaticResource {x:Type ListBoxItem}}">
+                    <Setter Property="Padding" Value="0"/>
+                </Style>
+            </ListBox.ItemContainerStyle>
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
-                        <Grid.ContextMenu>
-                            <ContextMenu>
-                                <MenuItem Header="Modify" Command="{Binding ModifyCommand}" CommandParameter="{Binding}"/>
-                                <MenuItem Header="Delete" Command="{Binding DeleteCommand}" CommandParameter="{Binding}"/>
-                            </ContextMenu>
-                        </Grid.ContextMenu>
+                    <!--
+                    <Grid users:ContextService.UseContextProvider="True">
                         <TextBlock Text="{Binding Username}"/>
+                    </Grid>
+                    -->
+
+                    <Grid ContextMenu="{StaticResource GlobalItemContextMenu}" HorizontalAlignment="Stretch">
+                        <TextBlock Margin="4,1"  Text="{Binding Username}"/>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>

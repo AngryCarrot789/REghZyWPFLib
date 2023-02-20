@@ -11,7 +11,7 @@
     <Grid Margin="10">
         <TextBlock Text="Enter Username: " Padding="5" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,1,0,0"/>
         <TextBox x:Name="UsernameBox" Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" Padding="5" VerticalAlignment="Top" Margin="98,0,0,0"/>
-        <Button Command="{Binding CancelCommand, Mode=OneTime}" Content="Cancel" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="75"/>
         <Button Command="{Binding ConfirmCommand, Mode=OneTime}" Content="OK" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="75" Margin="0,0,80,0"/>
+        <Button Command="{Binding CancelCommand, Mode=OneTime}" Content="Cancel" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="75"/>
     </Grid>
 </Window>

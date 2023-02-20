@@ -21,7 +21,7 @@ namespace REghZyWPFLib.Core {
             this.Register(typeof(T), instance);
         }
 
-        public object GetService(Type type) {
+        public object Provide(Type type) {
             if (this.services.TryGetValue(type, out object value)) {
                 return value;
             }
@@ -30,8 +30,8 @@ namespace REghZyWPFLib.Core {
             }
         }
 
-        public T GetService<T>() {
-            object value = GetService(typeof(T));
+        public T Provide<T>() {
+            object value = this.Provide(typeof(T));
             if (value is T t) {
                 return t;
             }
